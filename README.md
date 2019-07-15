@@ -37,7 +37,7 @@
 ### 开发
 
 1. Run `gradle bootRun`
-1. Open `http://127.0.0.1:9001/svr/`
+1. Open `http://127.0.0.1:9000/signup/`
 
 关于 Spring Boot DevTools 的 Build/Restart 的不足之处及应对方法
 
