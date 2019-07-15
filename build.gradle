@@ -1,0 +1,95 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.10.RELEASE'
+	}
+	repositories {
+		maven {
+            url mavenUrl
+        }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+	}
+
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        // mybatis-generator 插件路径
+        classpath "gradle.plugin.com.arenagod.gradle:mybatis-generator-plugin:1.4"
+	}
+
+}
+
+/*--------------------+
+|   Customer plugin   |
++=====================*/
+apply plugin: 'idea'
+/*--------------------------------------------+
+ |使用Groovy 插件构建项目，这个插件继承自Java插件，  |
+ |是应用具备编译能力，你的项目可以包含groovy,java代码 |
+  ============================================*/
+apply plugin: 'groovy'
+
+apply plugin: 'org.springframework.boot'
+
+// MyBatis代码自动生成插件工具
+apply plugin: "com.arenagod.gradle.MybatisGenerator"
+
+configurations {
+    mybatisGenerator
+    compile.exclude module: 'spring-boot-starter-logging'
+}
+
+mybatisGenerator {
+    verbose = true
+    // 配置文件路径
+    configFile = 'src/main/java/mbg/config/generatorConfig.xml'
+}
+
+/*--------------------------------------------+
+ |addResources = true 重新加载静态资源文件，  |
+ |不使用已经编译处理过的静态类资源 |
+ |systemProperty 配置读取配置文件类别|
+  ============================================*/
+bootRun {
+	addResources = true
+}
+
+/*--------------------------------------------+
+ | backupSource 重新打包应用是否重新备份原始文件  |
+  ============================================*/
+springBoot {
+	backupSource = false
+}
+/*---------------------------+
+ | 快速建立可发布的应用程序插件  |
+  ===========================*/
+apply plugin: 'application'
+/*---------------------------+
+ | 打包配置   |
+ | mainClass 应用启动主程序 |
+ | executable 配置打包生成的jar包 |
+ | 配置在Unix等操作系统上，jar文件是否完全可执行|
+  ===========================*/
+bootRepackage {
+	mainClass = 'com.el.SignUpApplication'
+	executable = true
+}
+
+group = 'com.el.sign_up_svr'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+/*-----------------+
+|   运行时依赖   |
++=================*/
+
+apply from: 'build-deps.gradle'
+
+dependencies {
+	runtime group: 'mysql', name: 'mysql-connector-java'
+	runtime group: 'org.springframework.boot', name: 'spring-boot-devtools'
+	compileOnly group: 'org.projectlombok', name: 'lombok'
+	testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+}
+
+

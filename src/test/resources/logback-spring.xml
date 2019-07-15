@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <!-- 开发环境 -->
+  <springProfile name="dev,demo">
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+    <include resource="./logback-dev.xml"/>
+  </springProfile>
+  <!-- 生产环境 -->
+  <springProfile name="prod">
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+    <include resource="./logback-prod.xml"/>
+  </springProfile>
+
+</configuration>

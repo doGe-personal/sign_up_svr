@@ -1,0 +1,72 @@
+# Spring Boot
+spring:
+  profiles:
+    active: ${EXCUTE_APP_PROFILE} # 输出有效的文件日志
+    include: demo,dev
+  http:
+    multipart:
+      maxFileSize: 20Mb
+      maxRequestSize: 21Mb
+      fileSizeThreshold: 1Mb
+  redis:
+    url: redis://:dl_love@dl.love.com:6379
+    # url: redis://:Dev.1234@elpdtman:6379
+    # Redis 连接超时(毫秒)
+    timeout: 10000
+  shiro:
+    loginUrl: /login
+  rabbitmq:
+    host: dl.love.com
+    port: 5672
+    username: df
+    password: df
+    publisher-returns: true #支持发布确认
+    publisher-confirms: true  #支持发布返回
+    listener:
+        simple:
+          acknowledge-mode: manual #采用手动应答
+          concurrency: 1 #指定最小的消费者数量
+          max-concurrency: 1 #指定最大的消费者数量
+          retry:
+            enabled: true #是否支持重试
+
+# jdbc connect properties
+jdbc:
+  driverClassName: com.mysql.jdbc.Driver
+  url: jdbc:mysql://39.108.225.237:3306/attack_road?useSSL=false&characterEncoding=utf8
+  username: root
+  password: root
+  maxActive: 200
+# com.el.core.AppProperties
+app:
+  # 服务程序 ID
+  progId: EL_EXCUTE
+  # 服务节点 ID
+  nodeId: ${EXCUTE_SVR_ID}
+# 权限相关配置
+security:
+  # 安全相关 APIs 的前缀路径（默认: /）
+  apis: /sec
+  # CORS支持（默认关闭）
+  cors: "*"
+  # 防CSRF开关（默认关闭）
+  xsrf: true
+  # 验证码开关（默认关闭）
+  captcha: true
+  # 响应混淆开关（默认关闭）
+  obscure: true
+
+# zk config
+zk:
+  zkConnect: 144.202.41.142:2181
+  zkEnable: true
+  zkConnectionTimeoutMs: 60000
+  zkSyncTimeMs: 10000
+  zkRoot: /meta
+
+# swagger
+swagger:
+   title: 进击之路Api
+   description: dl技术进击练习
+   version: 0.0.1
+   termsOfServiceUrl: https://springfox.github.io/springfox/docs/current/

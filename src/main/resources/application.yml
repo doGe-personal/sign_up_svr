@@ -1,0 +1,46 @@
+# Spring Boot
+spring:
+  profiles:
+    active: dev # 输出有效的文件日志
+  http:
+    multipart:
+      maxFileSize: 20Mb
+      maxRequestSize: 21Mb
+      fileSizeThreshold: 1Mb
+
+# jdbc connect properties
+jdbc:
+  driverClassName: com.mysql.jdbc.Driver
+  url: jdbc:mysql://39.108.225.237:3306/sign_up_db?useSSL=false&characterEncoding=utf8
+  username: root
+  password: root
+  maxActive: 200
+
+# 权限相关配置
+security:
+  # 安全相关 APIs 的前缀路径（默认: /）
+  apis: /sec
+  # CORS支持（默认关闭）
+  cors: "*"
+  # 防CSRF开关（默认关闭）
+  xsrf: true
+  # 验证码开关（默认关闭）
+  captcha: true
+  # 响应混淆开关（默认关闭）
+  obscure: true
+
+# swagger
+swagger:
+   title: 进击之路Api
+   description: dl技术进击练习
+   version: 0.0.1
+   termsOfServiceUrl: https://springfox.github.io/springfox/docs/current/
+
+server:
+  port: 9000
+  context-path: /signup
+
+
+#logger
+logging:
+  config: classpath:log4j2-spring.xml

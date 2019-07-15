@@ -1,0 +1,16 @@
+plugins {
+    id 'org.springframework.boot' version '1.5.10.RELEASE'
+
+    id 'war' // for Building WAR
+}
+
+configurations {
+    providedRuntime
+}
+
+war {
+    baseName = 'excute'
+}
+
+// Dependencies
+apply from: 'build-deps.gradle'
