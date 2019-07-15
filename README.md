@@ -27,9 +27,9 @@
 192.168.0.152 elpdtmvn
 ```
 1. Install Gradle and IDEA
-1. Run `git clone -b dev git@git.elitescloud.com:cooper/cooper-wxa-svr.git`
+1. Run `git clone https://github.com/doGe-personal/sign_up_svr.git`
 1. Run `gradle idea`
-1. Open `cooper-wxa-svr.ipr` file in IDEA
+1. Open `sign-up-svr.ipr` file in IDEA
     1. Plugin: Lombok
     1. Preferences: Compiler>Annotation Processors: Enable annotation processing
     1. Preferences: Build Tools>Gradle: Use local gradle distribution: <PATH/TO/YOUR/GRADLE>
